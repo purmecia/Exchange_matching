@@ -1,0 +1,13 @@
+<create>
+    <account id="1234567896" balance="10000">
+    <account id="1234567897" balance="10000">
+    <account id="1234567898" balance="10000">
+    <symbol sym="gu1">
+        <account id="1234567898">1000</account>
+    </symbol>
+    <symbol sym="gu2">
+        <account id="1234567897">300</account>
+        <account id="1234567896">300</account>
+    </symbol>
+    
+</create>

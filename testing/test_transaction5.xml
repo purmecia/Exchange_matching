@@ -1,0 +1,4 @@
+<transactions id="1234567894">
+    <order sym="gu2" amount="-200" limit="15"/>
+    <order sym="gu2" amount="-200" limit="20"/>
+</transactions>

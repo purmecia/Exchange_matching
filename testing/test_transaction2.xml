@@ -1,0 +1,8 @@
+<transactions id="1234567891">
+    <order sym="gu3" amount="100" limit="10"/>
+    <order sym="gu3" amount="-100" limit="10"/>
+     <query id="1" />
+    <query id="100" />
+    <cancel id="100" />
+    <cancel id="1" />
+</transactions>

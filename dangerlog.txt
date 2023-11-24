@@ -1,0 +1,31 @@
+For create request we covered these corner cases:
+1. account id doesn't exist when assigning a symbol to the account
+2. amount is negative when assigning a symbol to the account
+3. symbol name is invalid when creating a symbol (not alphanumeric)
+4. account id duplicated when creating account
+5. balance is negative when creating an account 
+
+For transactions request we covered these corner cases:
+1. account id doesn't exist when setting a transaction
+2. query other users' transaction id
+3. query a invalid transaction which doesn't exist
+4. cancel other users' transaction id
+5. cancel a invalid transaction which doesn't exist
+6. sell/buy a invalid symbol which doesn't exist
+7. invalid negative price when selling/buying a symbol
+8. insufficient balance or shares
+9. mutiple matched orders meeting the requirements. we solve the synchronization problem by lock.
+10. same price matching, need to prioritize the first order
+
+For matching process, deadlock sometimes may appear.
+we select all the orders stored into a vector and then process these orders one by one.
+But, synchronization problems happend when handling concurrency. Because there may be overlapped orders meeting the requirements at the same time.
+And if we dont lock the whole process, let's say thread A wanna update a transaction X which is locked by thread B and B wanna update a transaction Y which is also locked by A.
+deadlock happens. so we just lock the whole transaction process when handling this problem.
+
+But after we finish the project. I figured out a better way to solve that problem.
+We may not select all the appropriate transactions when doing a match.
+instead, we can select one appropriate transaction that matches the requirement best,
+and check that transaction's status. if it is not modified by other threads, we can make a deal. Then update that transaction.
+And then continue to the next matching transaction. If it is modified, the move on to the next. 
+So we dont have to lock the whole transaction process to achieve synchronization.
